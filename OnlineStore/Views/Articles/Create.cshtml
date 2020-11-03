@@ -1,0 +1,49 @@
+﻿@model OnlineStore.Data.ViewModels.CreateArticleViewModel
+@{
+    ViewData["Title"] = "Создание товара";
+}
+
+<h1>Создание товара</h1>
+
+<form asp-action="Create" asp-controller="Articles" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Name"></label> <br />
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price"></label> <br />
+        <input asp-for="Price" type="number" />
+        <span asp-validation-for="Price"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label> <br />
+        <input asp-for="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Amount"></label> <br />
+        <input asp-for="Amount" />
+        <span asp-validation-for="Amount"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IsFavorite"></label> <br />
+        <input asp-for="IsFavorite"  />
+        <span asp-validation-for="IsFavorite"></span>
+    </div>
+    
+    <div class="form-group">
+        <input type="file" name="Files" multiple="" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Создать товар" class="btn btn-outline-success" />
+    </div>
+</form>
+

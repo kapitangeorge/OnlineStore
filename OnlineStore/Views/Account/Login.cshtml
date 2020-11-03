@@ -1,0 +1,41 @@
+﻿@model OnlineStore.Data.ViewModels.LoginViewModel 
+@{
+    ViewData["Title"] = "Вход";
+}
+@{ 
+    Layout = null;
+}
+    <head>
+        <link href="~/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+        <link href="~/css/StyleSheet.css" type="text/css" rel="stylesheet" />
+
+    </head>
+<body >
+    <h1 class="text-center">Вход</h1>
+    <form method="post" asp-controller="Account" asp-action="Login" class="text-center">
+        <div asp-validation-summary="ModelOnly"></div>
+
+        <div class="form-group">
+            <label asp-for="UserName"></label>
+            <input asp-for="UserName" type="email" />
+            <span asp-validation-for="UserName"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" type="password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="RememberMe"></label>
+            <input asp-for="RememberMe" />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value=" Войти" class="btn btn-outline-success" />
+        </div>
+    </form>
+</body>
+
+

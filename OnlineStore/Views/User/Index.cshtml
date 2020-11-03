@@ -1,0 +1,29 @@
+﻿@model IEnumerable<OnlineStore.Data.Models.User>
+@{
+    ViewData["Title"] = "Все пользователи";
+}
+
+<h1>Все пользователи</h1>
+<a asp-action="Index" asp-controller="Home" class="btn btn-outline-dark">Назад</a>
+<a asp-action="Create" class="btn btn-outline-warning">Создать пользователя</a>
+<table class="table" style="color:aliceblue">
+    <tr><th>Имя</th><th>Фамилия</th><th>Email</th><th>Дата рождения</th><th>Адрес</th><th>Номер телефона</th><th></th></tr>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.FirstName</td>
+            <td>@user.LastName</td>
+            <td>@user.Email</td>
+            <td>@user.Birthday</td>
+            <td>@user.Address</td>
+            <td>@user.PhoneNumber</td>
+            <td>
+                <form asp-action="Delete" asp-route-id="@user.Id" method="post">
+                    <a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@user.Id">Изменить</a>
+                    <button type="submit" class="btn btn-outline-danger">Удалить</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+

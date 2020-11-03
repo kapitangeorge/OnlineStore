@@ -1,0 +1,15 @@
+﻿@model OnlineStore.Data.Models.Article
+
+    <div class="col-lg-4">
+        @if (@Model.Images != null)
+        {
+            <img class="img-thumbnail" src="@Model.Images.First()" alt="@Model.Name" />
+        }
+        else
+        {
+            <img class="img-thumbnail" src="~/img/default.png" alt="Нет Фото" />
+        }
+        <h3>@Model.Name</h3>
+        <p>Цена @Model.Price.ToString("C")</p>
+        <p><a class="btn btn-outline-warning" asp-action="ArticleProfile" asp-controller="Articles" asp-route-id="@Model.Id">Подробнее</a></p>
+    </div>

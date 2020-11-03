@@ -1,0 +1,50 @@
+﻿
+<!DocType html>
+
+<html>
+<head>
+    <link href="~/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/StyleSheet.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <div>
+            <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info">Главная</a>
+            <a asp-action="AllArticles" asp-controller="Articles" class="btn btn-outline-info">Все товары</a>
+        </div>
+        
+        @if (User.Identity.IsAuthenticated)
+        {
+            @if (@User.IsInRole("admin"))
+            {
+                <div>
+                    <a asp-action="Index" asp-controller="User" class="btn btn-outline-secondary">Все пользователи</a>
+                    <a asp-action="Index" asp-controller="Roles" class="btn btn-outline-secondary">Все роли</a>
+                    <a asp-action="Create" asp-controller="Articles" class="btn btn-outline-secondary">Добавить товар</a>
+                </div>
+
+            }
+            <div style="text-align:right">
+                <p>@User.Identity.Name</p>
+                <form method="post" asp-controller="Account" asp-action="Logout">
+                    <input type="submit" value="Выход"  class="btn btn-outline-danger"/>
+                </form>
+            </div>
+
+
+        }
+        else
+        {
+            <div style="text-align:right">
+                <a asp-controller="Account" asp-action="Login" class="btn btn-info">Войти</a>
+                <a asp-controller="Account" asp-action="Register" class="btn btn-info">Регистрация</a>
+            </div>
+
+        }
+
+    </header>
+    <div class="container mt-5">
+        @RenderBody()
+    </div>
+</body>
+</html>

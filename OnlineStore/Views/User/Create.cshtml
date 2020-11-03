@@ -1,0 +1,62 @@
+﻿@model OnlineStore.Data.ViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Добавление пользователя";
+}
+
+
+<h1>Добавление пользователя</h1>
+
+<form method="post" asp-controller="User" asp-action="Create">
+<div asp-validation-summary="ModelOnly"></div>
+<div class="form-group">
+    <label asp-for="Email"></label><br />
+    <input asp-for="Email" type="email" />
+    <span asp-validation-for="Email"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="FirstName"></label> <br />
+    <input asp-for="FirstName" />
+    <span asp-validation-for="FirstName"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="LastName"></label> <br />
+    <input asp-for="LastName" />
+    <span asp-validation-for="LastName"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="Address"></label> <br />
+    <input asp-for="Address" />
+    <span asp-validation-for="Address"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="PhoneNumber"></label> <br />
+    <input asp-for="PhoneNumber" type="number" />
+    <span asp-validation-for="PhoneNumber"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="Birthday"></label> <br />
+    <input asp-for="Birthday" type="date" />
+    <span asp-validation-for="Birthday"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="Password"></label> <br />
+    <input asp-for="Password" type="password" />
+    <span asp-validation-for="Password"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="PasswordConfirm"></label> <br />
+    <input asp-for="PasswordConfirm" type="password" />
+    <span asp-validation-for="Password"></span>
+</div>
+
+<div class="form-group">
+    <input type="submit" value="Создать" class="btn btn-light"/>
+</div>
+</form>

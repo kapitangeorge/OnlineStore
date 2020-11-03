@@ -1,0 +1,65 @@
+﻿@model OnlineStore.Data.ViewModels.EditArticleViewModel
+@{
+    ViewData["Title"] = "Редактирование товара";
+}
+
+<h1>Редактирование товара @Model.Name</h1>
+
+<form asp-action="Edit" asp-controller="Articles" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Name"></label> <br />
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <input asp-for="Id" type="hidden" />
+
+    <div class="form-group">
+        <label asp-for="Price"></label> <br />
+        <input asp-for="Price" type="number" />
+        <span asp-validation-for="Price"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label> <br />
+        <input asp-for="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Amount"></label> <br />
+        <input asp-for="Amount" />
+        <span asp-validation-for="Amount"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IsFavorite"></label> <br />
+        <input asp-for="IsFavorite" />
+        <span asp-validation-for="IsFavorite"></span>
+    </div>
+
+
+    <div class="form-group">
+        <input type="file" name="Files" multiple="" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Изменить товар" class="btn btn-outline-success" />
+    </div>
+</form>
+
+@foreach (var img in @Model.Images)
+{
+    <div style="margin-top: 15px;">
+        <img src="@img" class="img-thumbnail" width="200" height="200" />
+        <form method="post" asp-action="DeleteImage" asp-controller="Articles" style="margin-top:15px;">
+            <input name="id" type="hidden" value="@Model.Id"/>
+            <input name="path" type="hidden" value="@img" />
+            <input type="submit" value="Удалить" class="btn btn-outline-danger"/>
+        </form>
+    </div>
+
+}
+

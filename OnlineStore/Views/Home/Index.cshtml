@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Article>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1>Избранные товары</h1>
+
+<div class="row mt-5 mb-2">
+
+
+    @{
+        foreach (Article article in @Model)
+        {
+            @Html.Partial("ShowArticles", article);
+        }
+    }
+
+
+</div>
+
+
