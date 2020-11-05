@@ -1,0 +1,30 @@
+﻿@model AddReviewViewModel
+@{
+    ViewData["Title"] = "Оставить Отзыв";
+}
+
+<h1>Оставить отзыв</h1>
+
+<form method="post" asp-action="Create" asp-controller="Review">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Rating"></label>
+        <input asp-for="Rating" class="form-control" min="0" max="5" />
+        <span asp-validation-for="Rating"></span>
+    </div>
+
+    <input type="hidden" asp-for="Author" value="@User.Identity.Name" />
+    <input type="hidden" asp-for="ArticleId" value="@Model.ArticleId" />
+
+    <div class="form-group">
+        <input type="submit" value="Оставить отзыв" class="btn btn-outline-success" />
+    </div>
+</form>

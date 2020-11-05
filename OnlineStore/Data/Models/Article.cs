@@ -28,8 +28,7 @@ namespace OnlineStore.Data.Models
 
         public uint Amount { get; set; }
 
-        public bool IsFavorite { get; set; }
-        public List<Review> Reviews { get; set; }                                            
+        public bool IsFavorite { get; set; }                                          
 
         public List<string> Images { get; set; }
     }

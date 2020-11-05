@@ -13,7 +13,7 @@ namespace OnlineStore.Data.Models
 
         public string Decsription { get; set; }
 
-        public User Author { get; set; }
+        public string Author { get; set; }
 
         public int ArticleId { get; set; }
     }

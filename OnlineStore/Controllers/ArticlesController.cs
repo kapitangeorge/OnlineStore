@@ -72,9 +72,11 @@ namespace OnlineStore.Controllers
         public IActionResult ArticleProfile(int id)
         {
             var article = _appContext.Articles.FirstOrDefault(r => r.Id == id);
+            var model = new ArticleProfileViewModel { Id = article.Id, Name = article.Name, Amount = article.Amount, Rating = article.Rating, Images = article.Images, Description = article.Description, Price = article.Price, IsFavorite = article.IsFavorite };
+            model.Reviews = _appContext.Reviews.Where(r => r.ArticleId == model.Id).ToList();
             if(article != null)
             {
-                return View(article);
+                return View(model);
             }
             else
             {
