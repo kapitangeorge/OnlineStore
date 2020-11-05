@@ -1,12 +1,11 @@
-﻿@model AddReviewViewModel
+﻿@model EditReviewViewModel
 @{
-    ViewData["Title"] = "Оставить Отзыв";
+    ViewData["Title"] = "Редактирование отзыва";
 }
 
-<h1>Оставить отзыв</h1>
+<h1>Редактирование отзыва</h1>
 
-<form method="post" asp-action="Create" asp-controller="Review">
-
+<form method="post" asp-action="Edit" asp-controller="Review">
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="form-group">
@@ -19,15 +18,12 @@
         <label asp-for="Rating"></label>
         @for (var i = 0; i <= 5; i++)
         {
-            <input type="radio" asp-for="Rating" value="@i"> @i 
+            <input type="radio" asp-for="Rating" value="@i"> @i
         }
         <span asp-validation-for="Rating"></span>
     </div>
-
-    <input type="hidden" asp-for="Author" value="@User.Identity.Name" />
-    <input type="hidden" asp-for="ArticleId" value="@Model.ArticleId" />
-
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
     <div class="form-group">
-        <input type="submit" value="Оставить отзыв" class="btn btn-outline-success" />
+        <input type="submit" class="btn btn-outline-success" />
     </div>
 </form>

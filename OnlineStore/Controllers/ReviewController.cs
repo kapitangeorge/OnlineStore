@@ -48,6 +48,38 @@ namespace OnlineStore.Controllers
             return View(model);
         }
 
-        
+       [HttpGet]
+        public async Task<IActionResult> Edit (int id)
+        {
+            var review = await _appContext.Reviews.FirstOrDefaultAsync(r => r.Id == id);
+            if(review != null)
+            {
+                var model = new EditReviewViewModel { Rating = review.Rating, Description = review.Decsription, Id = id };
+                return View(model);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit (EditReviewViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var review = await _appContext.Reviews.FirstOrDefaultAsync(r => r.Id == model.Id);
+                review.Decsription = model.Description;
+                review.Rating = model.Rating;
+                _appContext.Update(review);
+                await _appContext.SaveChangesAsync();
+
+                return RedirectToAction("ArticleProfile", "Articles", new { id = review.ArticleId });
+            }
+
+            return View(model);
+            
+        }
     }
+
 }

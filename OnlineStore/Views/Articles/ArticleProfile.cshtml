@@ -32,7 +32,7 @@
     <h3>Рейтинг: @Model.Rating</h3>
 </div>
 
-@if (@User.Identity.IsAuthenticated)
+@if (@User.Identity.IsAuthenticated && @Model.Reviews.FirstOrDefault(r => r.Author == @User.Identity.Name) == null)
 {
     <div>
         <a asp-action="Create" asp-controller="Review" asp-route-id="@Model.Id" class="btn btn-outline-primary">Оставить отзыв</a>
@@ -47,6 +47,10 @@
            <label>Автор отзыва: @review.Author</label> <br />
             <label>Оценка: @review.Rating</label> <br />
             <p>@review.Decsription</p>
+            @if(review.Author == @User.Identity.Name)
+            {
+                <a asp-action="Edit" asp-controller="Review" asp-route-id="@review.Id" class="btn btn-outline-warning">Редактировать</a>
+            }
     </div>
     }
 }
