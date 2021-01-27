@@ -28,7 +28,12 @@ namespace OnlineStore
         {
             services.AddTransient<IUserValidator<User>, CustomUserValidator>();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => ShopCart.GetCart(sp));
             services.AddMvc();
+
+            services.AddMemoryCache();
+            services.AddSession();
 
             services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationContext>(options => 
                     options.UseNpgsql(Configaration.GetConnectionString("DefaultConnection")));
@@ -52,6 +57,7 @@ namespace OnlineStore
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 

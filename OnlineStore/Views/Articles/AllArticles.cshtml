@@ -3,6 +3,11 @@
     ViewData["Title"] = "Все товары";
 }
 
+<form asp-action="Search" asp-controller="Articles" method="post">
+    <input type="text" name="searchstring"  />
+    <input type="submit" value="Найти" class="btn btn-outline-primary" />
+</form>
+
 <h1>Все товары</h1>
 <div class="row mt-5 mb-2">
 

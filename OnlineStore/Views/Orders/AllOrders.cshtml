@@ -1,0 +1,55 @@
+﻿@model IEnumerable<OrdersViewModel>
+@{
+    ViewData["Title"] = "Все заказы";
+}
+
+<h1>Все заказы</h1> 
+
+@foreach (var order in Model)
+{
+    <div class="alert alert-secondary">
+        <table class="table">
+            <tr>
+                <td>Имя</td>
+                <td>Фамилия</td>
+                <td>Адрес</td>
+                <td>Телефон</td>
+                <td>Почтовый адрес</td>
+                <td>Дата и время заказа</td>
+                <td>Статус заказа</td>
+            </tr>
+            <tr>
+                <td>@order.User.FirstName</td>
+                <td>@order.User.LastName</td>
+                <td>@order.User.Address</td>
+                <td>@order.User.PhoneNumber</td>
+                <td>@order.User.Email</td>
+                <td>@order.OrderTime</td>
+                <td>
+                    @order.Status
+                    @if(@order.Status != "Получен" && @order.Status != "Отправлен")
+                    {
+                    <form asp-action="ChangeStatusSend" asp-controller="Orders" method="post">
+                        <input type="hidden" name="orderId" value="@order.Id" />
+                        <input type="submit" class="btn btn-outline-warning" value="Отправлен" />
+                    </form>
+                    }
+                    
+                </td>
+               
+            </tr>
+        </table>
+        <br />
+        <h4>Товары:</h4> <br />
+
+        @foreach(var article in @order.Articles)
+        {
+            <div class="alert alert-primary">
+                <label>Название: @article.Name</label> <br />
+                <label>Цена: @article.Price</label>
+                <img src="@article.Images.First()" width="150" height="150" />
+            </div>
+        }
+    </div>
+}
+

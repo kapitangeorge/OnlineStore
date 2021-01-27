@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Article>
+@{
+    ViewData["Title"] = "Search";
+}
+
+    <form asp-action="Search" asp-controller="Articles" method="post">
+        <input type="text" name="searchstring" />
+        <input type="submit" value="Найти" class="btn btn-outline-primary" />
+    </form>
+
+<h1>Результат поиска по запросу @ViewBag.Message</h1>
+
+@if (@Model != null)
+{
+<div class="row mt-5 mb-2">
+
+
+    @{
+        foreach (Article article in @Model)
+        {
+            @Html.Partial("ShowArticles", article);
+        }
+    }
+
+
+</div>
+            }
+        
+            else
+            {
+            <div>
+                <label>Ничего не найдено.</label>
+            </div>
+
+            }
+

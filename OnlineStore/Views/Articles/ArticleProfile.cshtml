@@ -32,10 +32,29 @@
     <h3>Рейтинг: @Model.Rating</h3>
 </div>
 
+@if (@Model.Amount != 0)
+{
+    <div>
+    <a asp-action="AddToCart" asp-controller="ShopCart" asp-route-id="@Model.Id" class="btn btn-outline-danger">Добавить в корзину</a>
+</div>
+}
+else
+{
+    <div>
+        <label>Товар отсутствует на складе.</label>
+    </div>
+}
+
 @if (@User.Identity.IsAuthenticated && @Model.Reviews.FirstOrDefault(r => r.Author == @User.Identity.Name) == null)
 {
     <div>
         <a asp-action="Create" asp-controller="Review" asp-route-id="@Model.Id" class="btn btn-outline-primary">Оставить отзыв</a>
+    </div>
+}
+else
+{
+    <div>
+        <label>Отзывы могут оставлять лишь авторизированные пользователи.</label>
     </div>
 }
 

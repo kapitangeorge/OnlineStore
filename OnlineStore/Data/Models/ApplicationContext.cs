@@ -17,5 +17,11 @@ namespace OnlineStore.Data.Models
         public DbSet<Article> Articles { get; set; }
 
         public DbSet<Review> Reviews { get; set; }
+
+        public DbSet<ShopCartItem> ShopCartItems { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }

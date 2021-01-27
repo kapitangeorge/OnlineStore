@@ -1,0 +1,35 @@
+﻿@model ShopCartViewModel
+
+    <div class="container">
+        @if (Model.Articles != null)
+        {
+            @foreach (var item in Model.Articles)
+            {
+                <div class="alert alert-warning mt-3">
+                    <b>Товар: </b> @item.Name <br />
+                    <b>Цена: </b> @item.Price.ToString("c");
+
+                </div>
+            }
+            <hr />
+            <h3>Итого: @Model.Sum</h3>
+            @if (@User.Identity.IsAuthenticated)
+            {
+                <form asp-action="AddOrder" asp-controller="Orders" method="post">
+                    <input type="hidden" name="username" value="@User.Identity.Name" />
+                    <input type="submit" class="btn btn-outline-success" value="Оформить заказ" />
+                </form>
+            }
+            else
+            {
+    <div>
+        <label>Для того чтобы оформить заказ необходимо авторизоваться, либо зарегестрироваться на сайте</label>
+    </div>
+                
+            }
+        }
+        else
+        {
+            <label>Ваша корзина пуста</label>
+        }
+    </div>

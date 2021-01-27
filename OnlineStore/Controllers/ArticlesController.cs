@@ -185,6 +185,13 @@ namespace OnlineStore.Controllers
             }
             return false;
         }
+
+        [HttpPost]
+        public IActionResult Search (string searchstring)
+        {
+            ViewBag.Message = searchstring;
+            return View(_appContext.Articles.Where(r => EF.Functions.Like(r.Name.ToLower().Trim(' '), "%" + searchstring.ToLower() + "%"," ")));
+        }
     }
 
     

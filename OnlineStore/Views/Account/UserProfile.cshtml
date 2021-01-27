@@ -1,0 +1,79 @@
+﻿@model ProfileUserViewModel
+@{
+    ViewData["Title"] = "Профиль пользователя";
+}
+
+<h1>Профиль пользователя @Model.Email</h1>
+
+<a class="btn btn-outline-info" asp-action="Edit" asp-controller="User" asp-route-id="@Model.Id">Редактировать профиль</a>
+<a class="btn btn-outline-info" asp-action="ChangePassword" asp-controller="User" asp-route-id="@Model.Id">Сменить пароль</a> <br />
+
+
+<div class="alert alert-secondary">
+    <table class="table">
+        <tr>
+            <th>Имя</th>
+            <th>@Model.FirstName</th>
+        </tr>
+        <tr>
+            <th>Фамилия</th>
+            <th>@Model.LastName</th>
+        </tr>
+        <tr>
+            <th>День Рождения</th>
+            <th>@Model.Birthday</th>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <th>@Model.Email</th>
+        </tr>
+        <tr>
+            <th>Адрес</th>
+            <th>@Model.Address</th>
+        </tr>
+        <tr>
+            <th>Номер телефона</th>
+            <th>@Model.PhoneNumber</th>
+        </tr>
+    </table>
+</div>
+<h3>Заказы</h3>
+@foreach (var order in @Model.Orders)
+{
+
+    <div class="alert alert-secondary">
+        <table class="table">
+            <tr>
+                <td>Дата и время заказа</td>
+                <td>Статус заказа</td>
+            </tr>
+            <tr>
+                <td>@order.OrderTime</td>
+                <td>
+                    @order.Status
+                    @if (@order.Status != "Получен" && @order.Status != "В обработке")
+                    {
+                        <form asp-action="ChangeStatusReceived" asp-controller="Orders" method="post">
+                            <input type="hidden" name="orderId" value="@order.Id" />
+                            <input type="submit" class="btn btn-outline-warning" value="Потвердить получение" />
+                        </form>
+                    }
+
+                </td>
+
+            </tr>
+        </table>
+        <br />
+        <h4>Товары:</h4> <br />
+
+        @foreach (var article in @order.Articles)
+        {
+            <div class="alert alert-primary">
+                <label>Название: @article.Name</label> <br />
+                <label>Цена: @article.Price</label>
+                <img src="@article.Images.First()" width="150" height="150" />
+            </div>
+        }
+    </div>
+}
+

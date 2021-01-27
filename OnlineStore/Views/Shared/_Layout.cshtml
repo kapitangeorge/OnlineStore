@@ -11,6 +11,7 @@
         <div>
             <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info">Главная</a>
             <a asp-action="AllArticles" asp-controller="Articles" class="btn btn-outline-info">Все товары</a>
+            <a asp-action="Index" asp-controller="ShopCart" class="btn btn-outline-info">Корзина</a>
         </div>
         
         @if (User.Identity.IsAuthenticated)
@@ -21,15 +22,17 @@
                     <a asp-action="Index" asp-controller="User" class="btn btn-outline-secondary">Все пользователи</a>
                     <a asp-action="Index" asp-controller="Roles" class="btn btn-outline-secondary">Все роли</a>
                     <a asp-action="Create" asp-controller="Articles" class="btn btn-outline-secondary">Добавить товар</a>
+                    <a asp-action="AllOrders" asp-controller="Orders" class="btn btn-outline-secondary">Все заказы</a>
                 </div>
 
             }
-            <div style="text-align:right">
-                <p>@User.Identity.Name</p>
-                <form method="post" asp-controller="Account" asp-action="Logout">
-                    <input type="submit" value="Выход"  class="btn btn-outline-danger"/>
-                </form>
-            </div>
+    <div style="text-align:right">
+        <p>@User.Identity.Name</p>
+        <a asp-action="UserProfile" asp-controller="Account" asp-route-username="@User.Identity.Name" class="btn btn-outline-info">Мой профиль</a>
+        <form method="post" asp-controller="Account" asp-action="Logout">
+            <input type="submit" value="Выход" class="btn btn-outline-danger" />
+        </form>
+    </div>
 
 
         }
